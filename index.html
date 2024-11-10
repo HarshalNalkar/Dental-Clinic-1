@@ -3,32 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smile Care Dental Clinic</title>
+    <title>Modern Dental Care</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* Core Styles */
+        :root {
+            --primary-light: #00bcd4;
+            --primary-dark: #1e3d59;
+            --accent-light: #f5f0e1;
+            --accent-dark: #ff6e6c;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Arial', sans-serif;
+            scroll-behavior: smooth;
         }
 
-        :root {
-            --primary-color: #00a6e6;
-            --secondary-color: #2c3e50;
-            --accent-color: #e74c3c;
-            --light-bg: #f8f9fa;
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
 
-        /* Enhanced Animations */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes pulse {
@@ -37,37 +51,65 @@
             100% { transform: scale(1); }
         }
 
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
+        .nav-gradient {
+        background: linear-gradient(135deg, #00bcd4, #1e3d59);
+        padding: 1rem 5%;
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    }
 
-        /* Navigation with gradient */
+    .nav-gradient .nav-links a {
+        color: white;
+        transition: all 0.3s;
+    }
+
+    .nav-gradient .nav-links a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+    }
+
+        /* Enhanced Navigation */
         nav {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            padding: 1rem 5%;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
             position: fixed;
             width: 100%;
             z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+
+        nav.scrolled {
+            background: var(--primary-dark);
+            padding: 0.5rem 5%;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            animation: slideIn 0.5s ease-out;
-            color: white;
+            gap: 1rem;
         }
 
         .logo img {
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            border: 2px solid white;
+            animation: rotate 20s linear infinite;
+        }
+
+        .logo h2 {
+            color: var(--primary-dark);
+            transition: color 0.3s;
+        }
+
+        nav.scrolled .logo h2 {
+            color: var(--text-light);
         }
 
         .nav-links {
@@ -77,99 +119,237 @@
 
         .nav-links a {
             text-decoration: none;
-            color: white;
+            color: var(--primary-dark);
             font-weight: 500;
-            transition: all 0.3s;
             padding: 0.5rem 1rem;
             border-radius: 25px;
+            transition: all 0.3s;
         }
 
-        .nav-links a:hover {
-            background: rgba(255,255,255,0.2);
+        nav.scrolled .nav-links a {
+            color: var(--text-light);
+        }
+
+        /* .nav-links a:hover {
+            background: var(--primary-light);
+            color: var(--text-light);
             transform: translateY(-2px);
+        } */
+
+        /* Enhanced Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-light);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* About Section */
-        .about-section {
-            padding: 6rem 5% 4rem;
-            background: var(--light-bg);
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('/api/placeholder/2000/1000') center/cover;
+            opacity: 0.1;
+            animation: rotate 240s linear infinite;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: slideUp 1s ease-out 0.2s backwards;
+        }
+
+        /* Enhanced About Section */
+        .about {
+            padding: 6rem 5%;
+            background: var(--accent-light);
+        }
+
+        .about h2 {
+            text-align: center;
+            color: var(--primary-dark);
+            margin-bottom: 2rem;
         }
 
         .about-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
 
         .about-card {
             background: white;
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            animation: fadeIn 1s ease-out;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            text-align: center;
         }
 
         .about-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
-        /* Enhanced Appointment Form */
-        .appointment-form {
-            background: white;
-            padding: 3rem;
+        .about-card i {
+            color: var(--primary-light);
+            margin-bottom: 1rem;
+        }
+
+        /* Enhanced Services Section */
+        .services {
+            padding: 6rem 5%;
+            background: var(--primary-dark);
+            color: var(--text-light);
+        }
+
+        .services h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
             border-radius: 20px;
-            max-width: 600px;
-            margin: 2rem auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            animation: fadeIn 1s ease-out;
-            position: relative;
-            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            cursor: pointer;
+            text-align: center;
         }
 
-        .appointment-form::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 200%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255,255,255,0.2),
-                transparent
-            );
-            animation: shimmer 2s infinite;
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .service-card i {
+            color: var(--accent-light);
+            margin-bottom: 1rem;
+        }
+
+        /* Enhanced Appointment Section */
+        .appointment {
+            padding: 6rem 5%;
+            background: white;
+        }
+
+        .appointment h2 {
+            text-align: center;
+            color: var(--primary-dark);
+            margin-bottom: 2rem;
+        }
+
+        .appointment-form {
+            max-width: 600px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         .form-group {
             margin-bottom: 1.5rem;
-            position: relative;
         }
 
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 1rem;
             border: 2px solid #eee;
             border-radius: 10px;
             transition: all 0.3s;
-            font-size: 1rem;
         }
 
         .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 10px rgba(0,166,230,0.2);
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 15px rgba(0, 188, 212, 0.2);
         }
 
-        /* Contact Section */
-        .contact-section {
-            padding: 4rem 5%;
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            color: white;
+        /* Enhanced Testimonials Section */
+        .testimonials {
+            padding: 6rem 5%;
+            background: linear-gradient(45deg, var(--primary-dark), var(--accent-dark));
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .testimonials h2 {
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 3rem auto;
+            position: relative;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            margin: 1rem;
+            text-align: center;
+            flex: 0 0 100%;
+            animation: slideTestimonial 20s infinite linear;
+        }
+
+        .testimonial-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 3px solid var(--accent-light);
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            margin: 1rem 0;
+        }
+
+        /* Enhanced Contact Section */
+        .contact {
+            padding: 6rem 5%;
+            background: var(--accent-light);
+        }
+
+        .contact h2 {
+            text-align: center;
+            color: var(--primary-dark);
+            margin-bottom: 2rem;
         }
 
         .contact-grid {
@@ -181,255 +361,487 @@
 
         .contact-info {
             padding: 2rem;
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            animation: fadeIn 1s ease-out;
-        }
-
-        .contact-form {
             background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            color: var(--secondary-color);
-        }
-
-        /* Enhanced Submit Button */
-        .submit-btn {
-            background: var(--primary-color);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.3s;
-            font-size: 1.1rem;
-            font-weight: bold;
-            width: 100%;
-            animation: pulse 2s infinite;
         }
 
-        .submit-btn:hover {
-            background: var(--secondary-color);
-            transform: translateY(-2px);
+        .contact-info:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
 
-        /* More sections... */
-
-        /* Footer */
+        /* Enhanced Footer */
         footer {
-            background: var(--secondary-color);
-            color: white;
+            background: var(--primary-dark);
+            color: var(--text-light);
             padding: 3rem 5%;
             text-align: center;
         }
 
-        .footer-content {
+        .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
             margin-bottom: 2rem;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
 
         .social-links a {
-            color: white;
+            color: var(--text-light);
             font-size: 1.5rem;
-            transition: transform 0.3s;
+            transition: all 0.3s;
         }
 
         .social-links a:hover {
+            color: var(--primary-light);
             transform: translateY(-5px);
         }
+
+        /* Enhanced Button Styles */
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary-light);
+            color: var(--text-light);
+            animation: pulse 2s infinite;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            animation: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-grid,
+            .services-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+    
+
+    /* Booking Section Styles */
+    .booking {
+        padding: 6rem 5%;
+        background: #f5f0e1;
+    }
+
+    .booking-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .offer-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: all 0.3s;
+    }
+
+    .offer-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    .offer-price {
+        font-size: 2.5rem;
+        color: #00bcd4;
+        margin: 1rem 0;
+    }
+
+    /* Reviews Section Styles */
+    .reviews {
+        padding: 6rem 5%;
+        background: linear-gradient(45deg, #1e3d59, #00bcd4);
+        color: white;
+    }
+
+    .review-container {
+        display: flex;
+        gap: 2rem;
+        overflow-x: auto;
+        padding: 2rem 0;
+        scroll-snap-type: x mandatory;
+    }
+
+    .review-card {
+        flex: 0 0 350px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 2rem;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        scroll-snap-align: start;
+    }
+
+    .reviewer-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .reviewer-info img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 3px solid #00bcd4;
+    }
+
+    /* Contact Section Styles */
+    .contact-section {
+        padding: 6rem 5%;
+        background: white;
+    }
+
+    .contact-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+    }
+
+    .contact-info {
+        padding: 2rem;
+        background: #f5f0e1;
+        border-radius: 15px;
+    }
+
+    .contact-form {
+        padding: 2rem;
+        background: #f5f0e1;
+        border-radius: 15px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        width: 100%;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 2px solid #00bcd4;
+        border-radius: 8px;
+        transition: all 0.3s;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        box-shadow: 0 0 15px rgba(0, 188, 212, 0.2);
+    }
+
+    /* Footer Styles */
+    .footer {
+        background: #1e3d59;
+        color: white;
+        padding: 4rem 5% 2rem;
+    }
+
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    .footer-section h3 {
+        margin-bottom: 1.5rem;
+        color: #00bcd4;
+    }
+
+    .social-icons {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .social-icons a {
+        color: white;
+        font-size: 1.5rem;
+        transition: all 0.3s;
+    }
+
+    .social-icons a:hover {
+        color: #00bcd4;
+        transform: translateY(-5px);
+    }
+        
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
+    <nav class="nav-gradient">
         <div class="logo">
             <img src="/api/placeholder/50/50" alt="Dental Logo">
-            <h2>Smile Care</h2>
+            <h2>Dental Care</h2>
         </div>
         <div class="nav-links">
-            <a href="#home">🏠 Home</a>
-            <a href="#about">ℹ️ About</a>
-            <a href="#services">🦷 Services</a>
-            <a href="#appointment">📅 Book</a>
-            <a href="#contact">📞 Contact</a>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#booking">Book</a>
+            <a href="#testimonials">Reviews</a>
+            <a href="#contact">Contact</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Welcome to Smile Care Dental Clinic</h1>
-            <p>Your Journey to a Perfect Smile Starts Here</p>
+            <h1>Welcome to Dental Care</h1>
+            <p>Experience the future of dental care with our cutting-edge technology</p>
+            <a href="#booking" class="btn btn-primary">Book Appointment</a>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about-section">
-        <h2>About Smile Care</h2>
+    <section id="about" class="about">
+        <h2>Why Choose Us</h2>
         <div class="about-grid">
             <div class="about-card">
-                <h3>🏥 Our Mission</h3>
-                <p>Providing exceptional dental care with cutting-edge technology and compassionate service to create healthy, beautiful smiles.</p>
+                <i class="fas fa-tooth fa-3x"></i>
+                <h3>Expert Team</h3>
+                <p>Our experienced dentists provide the highest quality care using latest technologies.</p>
             </div>
             <div class="about-card">
-                <h3>👨‍⚕️ Expert Team</h3>
-                <p>Our experienced dentists and staff are committed to delivering personalized care tailored to your needs.</p>
+                <i class="fas fa-clinic-medical fa-3x"></i>
+                <h3>Modern Facility</h3>
+                <p>State-of-the-art equipment in a comfortable, welcoming environment.</p>
             </div>
             <div class="about-card">
-                <h3>🌟 State-of-the-Art Facility</h3>
-                <p>Experience modern dentistry in our comfortable, advanced facility equipped with the latest dental technology.</p>
+                <i class="fas fa-heart fa-3x"></i>
+                <h3>Patient Care</h3>
+                <p>Personalized attention and care for every patient's unique needs.</p>
             </div>
         </div>
     </section>
 
-    <!-- Appointment Form -->
-    <section id="appointment" class="appointment-form">
-        <h2>📅 Book Your Appointment</h2>
-        <form id="appointmentForm">
-            <div class="form-group">
-                <input type="text" placeholder="Full Name" required>
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2>Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-teeth fa-3x"></i>
+                <h3>General Dentistry</h3>
+                <p>Comprehensive dental care for the whole family.</p>
             </div>
-            <div class="form-group">
-                <input type="email" placeholder="Email" required>
+            <div class="service-card">
+                <i class="fas fa-teeth-open fa-3x"></i>
+                <h3>Cosmetic Dentistry</h3>
+                <p>Transform your smile with our aesthetic treatments.</p>
             </div>
-            <div class="form-group">
-                <input type="tel" placeholder="Phone Number" required>
-            </div>
-            <div class="form-group">
-                <input type="datetime-local" required>
-            </div>
-            <div class="form-group">
-                <select required>
-                    <option value="">Select Service</option>
-                    <option value="cleaning">Dental Cleaning</option>
-                    <option value="checkup">Regular Checkup</option>
-                    <option value="whitening">Teeth Whitening</option>
-                    <option value="other">Other Services</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <textarea placeholder="Additional Notes" rows="4"></textarea>
-            </div>
-            <button type="submit" class="submit-btn">Schedule Appointment</button>
-        </form>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <h2>Contact Us</h2>
-        <div class="contact-grid">
-            <div class="contact-info">
-                <h3>📍 Visit Us</h3>
-                <p>123 Dental Street</p>
-                <p>City, State 12345</p>
-                <br>
-                <h3>📞 Call Us</h3>
-                <p>(123) 456-7890</p>
-                <br>
-                <h3>📧 Email Us</h3>
-                <p>info@smilecare.com</p>
-            </div>
-            <div class="contact-form">
-                <h3>Send us a Message</h3>
-                <form id="contactForm">
-                    <div class="form-group">
-                        <input type="text" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea placeholder="Your Message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
+            <div class="service-card">
+                <i class="fas fa-tooth fa-3x"></i>
+                <h3>Orthodontics</h3>
+                <p>Achieve the perfect smile with our alignment solutions.</p>
             </div>
         </div>
     </section>
 
-    <!-- WhatsApp Button -->
-    <a href="https://wa.me/1234567890" class="whatsapp-btn" target="_blank">
-        <i class="fab fa-whatsapp fa-2x"></i>
-    </a>
+    <!-- Booking Section -->
+<section class="booking" id="booking">
+    <h2 class="section-title">Special Offers</h2>
+    <div class="booking-cards">
+        <div class="offer-card">
+            <i class="fas fa-teeth-open fa-3x" style="color: #00bcd4;"></i>
+            <h3>Basic Checkup</h3>
+            <div class="offer-price">$49</div>
+            <ul style="list-style: none; padding: 0;">
+                <li>✓ Dental Examination</li>
+                <li>✓ Teeth Cleaning</li>
+                <li>✓ Dental X-Rays</li>
+            </ul>
+            <button class="btn btn-primary">Book Now</button>
+        </div>
+        <div class="offer-card">
+            <i class="fas fa-tooth fa-3x" style="color: #00bcd4;"></i>
+            <h3>Complete Care</h3>
+            <div class="offer-price">$99</div>
+            <ul style="list-style: none; padding: 0;">
+                <li>✓ Full Examination</li>
+                <li>✓ Deep Cleaning</li>
+                <li>✓ Fluoride Treatment</li>
+                <li>✓ Dental X-Rays</li>
+            </ul>
+            <button class="btn btn-primary">Book Now</button>
+        </div>
+        <div class="offer-card">
+            <i class="fas fa-star fa-3x" style="color: #00bcd4;"></i>
+            <h3>Premium Package</h3>
+            <div class="offer-price">$149</div>
+            <ul style="list-style: none; padding: 0;">
+                <li>✓ Complete Examination</li>
+                <li>✓ Advanced Cleaning</li>
+                <li>✓ Whitening Treatment</li>
+                <li>✓ Dental X-Rays</li>
+                <li>✓ Take-Home Care Kit</li>
+            </ul>
+            <button class="btn btn-primary">Book Now</button>
+        </div>
+    </div>
+</section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div>
-                <h3>Opening Hours</h3>
+<!-- Reviews Section -->
+<section class="reviews" id="testimonials">
+    <h2 class="section-title">Patient Reviews</h2>
+    <div class="review-container">
+        <div class="review-card">
+            <div class="reviewer-info">
+                <img src="/api/placeholder/60/60" alt="Patient">
+                <div>
+                    <h4>Sarah Johnson</h4>
+                    <div class="stars">★★★★★</div>
+                </div>
+            </div>
+            <p>"Amazing experience! The staff was very professional and caring. My teeth have never felt better!"</p>
+        </div>
+        <div class="review-card">
+            <div class="reviewer-info">
+                <img src="/api/placeholder/60/60" alt="Patient">
+                <div>
+                    <h4>Mike Thompson</h4>
+                    <div class="stars">★★★★★</div>
+                </div>
+            </div>
+            <p>"Best dental care I've ever received. The modern facilities and gentle approach made my visit stress-free."</p>
+        </div>
+        <div class="review-card">
+            <div class="reviewer-info">
+                <img src="/api/placeholder/60/60" alt="Patient">
+                <div>
+                    <h4>Emily Davis</h4>
+                    <div class="stars">★★★★★</div>
+                </div>
+            </div>
+            <p>"Exceptional service! The team made me feel comfortable and explained everything clearly."</p>
+        </div>
+        <div class="review-card">
+            <div class="reviewer-info">
+                <img src="/api/placeholder/60/60" alt="Patient">
+                <div>
+                    <h4>Emily Davis</h4>
+                    <div class="stars">★★★★★</div>
+                </div>
+            </div>
+            <p>"Exceptional service! The team made me feel comfortable and explained everything clearly."</p>
+        </div>
+        <div class="review-card">
+            <div class="reviewer-info">
+                <img src="/api/placeholder/60/60" alt="Patient">
+                <div>
+                    <h4>Emily Davis</h4>
+                    <div class="stars">★★★★★</div>
+                </div>
+            </div>
+            <p>"Exceptional service! The team made me feel comfortable and explained everything clearly."</p>
+        </div>
+        <div class="review-card">
+            <div class="reviewer-info">
+                <img src="/api/placeholder/60/60" alt="Patient">
+                <div>
+                    <h4>Emily Davis</h4>
+                    <div class="stars">★★★★★</div>
+                </div>
+            </div>
+            <p>"Exceptional service! The team made me feel comfortable and explained everything clearly."</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section" id="contact">
+    <h2 class="section-title">Contact Us</h2>
+    <div class="contact-container">
+        <div class="contact-info">
+            <h3>Get in Touch</h3>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Dental Street, City, State 12345</p>
+            <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+            <p><i class="fas fa-envelope"></i> info@moderndentalcare.com</p>
+            <div class="office-hours">
+                <h4>Office Hours</h4>
                 <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
                 <p>Saturday: 9:00 AM - 2:00 PM</p>
                 <p>Sunday: Closed</p>
             </div>
-            <div>
-                <h3>Quick Links</h3>
-                <p><a href="#services">Our Services</a></p>
-                <p><a href="#appointment">Book Appointment</a></p>
-                <p><a href="#contact">Contact Us</a></p>
-            </div>
-            <div>
-                <h3>Connect With Us</h3>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
+        </div>
+        <div class="contact-form">
+            <h3>Send us a Message</h3>
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <input type="tel" placeholder="Your Phone">
+                <textarea rows="4" placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Modern Dental Care</h3>
+            <p>Providing quality dental care with modern technology and a gentle touch.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
             </div>
         </div>
-        <p>&copy; 2024 Smile Care Dental Clinic. All rights reserved.</p>
-    </footer>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#booking">Book Appointment</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Services</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li>General Dentistry</li>
+                <li>Cosmetic Dentistry</li>
+                <li>Orthodontics</li>
+                <li>Emergency Care</li>
+            </ul>
+        </div>
+    </div>
+    <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+        <p>&copy; 2024 Dental Care. All rights reserved by Harshal Nalkar</p>
+    </div>
+</footer>
 
-    <script>
-        // Form submission handling
-        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you! Your appointment request has been received.');
-        });
-
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you! Your message has been sent.');
-        });
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Animation on scroll
-        const elements = document.querySelectorAll('.about-card, .contact-info, .contact-form');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        });
-
-        elements.forEach(element => {
-            element.style.opacity = 0;
-            element.style.transform = 'translateY(20px)';
-            element.style.transition = 'all 0.5s ease-out';
-            observer.observe(element);
-        });
-    </script>
 </body>
 </html>
+
+
