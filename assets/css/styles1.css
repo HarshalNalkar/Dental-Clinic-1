@@ -155,7 +155,11 @@ h4 {
   justify-content: center;
   padding: 0 5%;
   margin-top: 80px;
-  overflow: hidden; /* Ensure content doesn’t exceed section bounds */
+  /* overflow: hidden; */
+  background-image: url(https://harshalnalkar.github.io/Dental-Clinic-1/assets/images/pexels-cedric-fauntleroy-4269692.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .hero-video {
@@ -487,7 +491,7 @@ h4 {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
 }
 
 .contact::before {
