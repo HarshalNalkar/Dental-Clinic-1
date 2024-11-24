@@ -412,7 +412,7 @@ h4 {
   display: flex;
   gap: 2rem;
   padding: 2rem 0;
-  overflow-x: hidden;
+  overflow-x: auto;
   position: relative;
 }
 
@@ -425,6 +425,9 @@ h4 {
   transform: translateX(0);
   transition: transform 0.5s ease, box-shadow 0.3s ease;
   position: relative;
+
+  scroll-snap-align: center;
+  flex: 0 0 calc(33.333% - 2rem); 
 }
 
 .testimonial-card::before {
@@ -480,6 +483,8 @@ h4 {
   object-fit: cover;
   border: 3px solid var(--primary-color);
 }
+
+
 
 /* Contact Section Enhanced Styles */
 .contact {
@@ -650,6 +655,8 @@ h4 {
   border-radius: 15px;
   transform: translateY(-50px);
   transition: transform 0.3s ease;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .modal.active .modal-content {
